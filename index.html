@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Level up reservation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+    
+<style>
+  body {
+  background: linear-gradient(to right, #000000, #ffffff);
+  animation: gradient 10s infinite;
+  text-align: center;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+  form {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    margin: 0 auto;
+    max-width: 500px;
+  }
+
+  h1 {
+    margin-top: 50px;
+    color: #333;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+
+  </style>
+
+  </head>
+  <body>
+    <button onclick="window.location.href='/Classes'">Classes</button>
+	<button onclick="window.location.href='/Payments'">Payment</button>
+	<button onclick="window.location.href='/Reservations'">Reservation</button>
+    <h1>CUSTOMER INFO</h1>
+  <form>
+    <label for="customer_id">Enter your ID:</label>
+    <input type="number" id="customer_id" placeholder="customer_id" />
+
+    <label for="first_name">Enter your first name:</label>
+    <input type="text" id="first_name" placeholder="first_name" />
+
+    <label for="last_name">Enter your last name:</label>
+    <input type="text" id="last_name" placeholder="last_name" />
+
+    <label for="date_of_birth">Enter your date of birth:</label>
+    <input type="date" id="date_of_birth" placeholder="date_of_birth" />
+
+    <label for="email">Enter your email:</label>
+    <input type="text" id="email" placeholder="email" />
+
+    <label for="phone_number">Enter your phone number:</label>
+    <input type="text" id="phone_number" placeholder="phone_number" />
+
+    <label for="customer_status">Enter your customer status whether your are new or regular:</label>
+    <input type="text" id="customer_status" placeholder="customer_status" />
+
+    <label for="fees_outstanding">Enter your fees outstanding:</label>
+    <input type="number" id="fees_outstanding" placeholder="fees_outstanding" />
+
+    <label for="date_became_customer">Enter your date of becoming a customer:</label>
+    <input type="date" id="date_became_customer" placeholder="date_became_customer" />
+
+    <button id="insert-button">Insert</button>
+    <button id="submit-button">Submit</button>
+
+    <script>
+      // Event listener for the create button
+      document
+        .getElementById('insert-button')
+        .addEventListener('click', async () => {
+          const customer_id= document.getElementById('customer_id').value;
+          const first_name= document.getElementById('first_name').value;
+          const last_name = document.getElementById('last_name').value;
+          const date_of_birth= document.getElementById('date_of_birth').value;
+          const email = document.getElementById('email').value;
+          const phone_number =
+            document.getElementById('phone_number').value;
+          const customer_status= document.getElementById(
+            'customer_status'
+          ).value;
+          const fees_outstanding= document.getElementById(
+            'fees_outstanding'
+          ).value;
+          const date_became_customer= document.getElementById(
+            'date_became_customer'
+          ).value;
+          const customer= new Customers(
+            customer_id,
+            first_name,
+            last_name,
+            date_of_birth,
+            email,
+            phone_number,
+            customer_status,
+            fees_outstanding,
+            date_became_customer
+          );
+          const result = await createCustomers(customer);
+          console.log(result);
+        });
+
+      // Event listener for the done button
+      document.getElementById('submit-button').addEventListener('click', () => {
+        const customer_id= document.getElementById('customer_id').value;
+          const first_name= document.getElementById('first_name').value;
+          const last_name = document.getElementById('last_name').value;
+          const date_of_birth= document.getElementById('date_of_birth').value;
+          const email = document.getElementById('email').value;
+          const phone_number =
+            document.getElementById('phone_number').value;
+          const customer_status= document.getElementById(
+            'customer_status'
+          ).value;
+          const fees_outstanding= document.getElementById(
+            'fees_outstanding'
+          ).value;
+          const date_became_customer= document.getElementById(
+            'date_became_customer'
+          ).value;
+
+        alert(`You entered: ${customer_id}`);
+        alert(`You entered: ${first_name}`);
+        alert(`You entered: ${last_name}`);
+        alert(`You entered: ${date_of_birth}`);
+        alert(`You entered: ${email}`);
+        alert(`You entered: ${phone_number}`);
+        alert(`You entered: ${customer_status}`);
+        alert(`You entered: ${fees_outstanding}`);
+        alert(`You entered: ${date_became_customer}`);
+      });
+
+      // Caravan class definition
+      class Customers {
+      constructor(
+        customer_id,
+        first_name,
+        last_name,
+        date_of_birth,
+        email,
+        phone_number,
+        customer_status,
+        fees_outstanding,
+        date_became_customer
+      ) {
+        this.customer_id = customer_id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.date_of_birth = date_of_birth;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.customer_status = customer_status;
+        this.fees_outstanding = fees_outstanding;
+        this.date_became_customer = date_became_customer;
+      }
+    }
+
+      async function createCustomers(customer) {
+        try {
+          const response = await fetch('/Customer', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(customer),
+          });
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    </script>
+    </form>
+  </body>
+</html>
